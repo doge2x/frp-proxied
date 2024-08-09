@@ -14,12 +14,12 @@
     }
   ],
   "route": {
-    "rules": [{ "inbound": "proxy-in", "outbound": "remote-out" }]
+    "rules": [{ "inbound": "proxy-in", "outbound": "proxy-out" }]
   },
   "outbounds": [
     { "tag": "direct", "type": "direct" },
     {
-      "tag": "remote-out",
+      "tag": "proxy-out",
       "type": "vless",
       "server": "{{SERVER_ADDR}}",
       "server_port": 12345,

@@ -25,7 +25,7 @@
     "auto_detect_interface": true,
     "rules": [
       // 来自 frpc 的连接, 重定向到 server:frps
-      { "inbound": "frpc-in", "outbound": "server-frps-out" },
+      { "inbound": "frpc-in", "outbound": "frpc-out" },
       // 来自 client 的连接, 直接出站
       { "inbound": "client-in", "outbound": "direct" }
     ]
@@ -33,7 +33,7 @@
   "outbounds": [
     { "tag": "direct", "type": "direct" },
     {
-      "tag": "server-frps-out",
+      "tag": "frpc-out",
       "type": "vless",
       "server": "{{SERVER_ADDR}}",
       "server_port": 12345,

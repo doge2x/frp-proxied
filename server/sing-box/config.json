@@ -28,25 +28,25 @@
     "auto_detect_interface": true,
     "rules": [
       // 来自 remote:frpc 的连接, 重定向到 frps
-      { "auth_user": "remote", "outbound": "frps-out" },
-      // 来自 client 的连接, 重定向到 server:sing-box
-      { "auth_user": "client", "outbound": "remote-proxy-out" }
+      { "auth_user": "remote", "outbound": "remote-out" },
+      // 来自 client 的连接, 重定向到 remote:sing-box
+      { "auth_user": "client", "outbound": "client-out" }
     ]
   },
   "outbounds": [
     { "tag": "direct", "type": "direct" },
     {
-      "tag": "frps-out",
+      "tag": "remote-out",
       "type": "direct",
       // 这里的地址是 compose.yaml 中 frps 的服务名
       "override_address": "frps",
       "override_port": 7001
     },
     {
-      "tag": "remote-proxy-out",
+      "tag": "client-out",
       "type": "socks",
       "server": "frps",
-      // 这里的地址是 remote:frpc 的 remotePort
+      // 这里的端口是 remote:frpc 的 remotePort
       "server_port": 7002
     }
   ]
