@@ -1,0 +1,5 @@
+bindPort = 7001
+allowPorts = [{ single = 7002 }]
+
+log.to = "console"
+log.level = "info"

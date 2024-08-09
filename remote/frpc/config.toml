@@ -1,0 +1,16 @@
+serverAddr = "sing-box"
+serverPort = 7001
+transport.protocol = "tcp"
+
+log.to = "console"
+log.level = "info"
+
+[[proxies]]
+name = "sing-box"
+type = "tcp"
+localIP = "sing-box"
+# 这里是 remote:client-in 的端口
+localPort = 7002
+remotePort = 7002
+transport.useEncryption = true
+transport.useCompression = true

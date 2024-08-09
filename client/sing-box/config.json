@@ -1,0 +1,33 @@
+{
+  "log": {
+    "level": "info"
+  },
+  "dns": {
+    "servers": [{ "tag": "default", "address": "local" }]
+  },
+  "inbounds": [
+    {
+      "tag": "proxy-in",
+      "type": "mixed",
+      "listen": "::",
+      "listen_port": 1080
+    }
+  ],
+  "route": { "final": "remote-out" },
+  "outbounds": [
+    {
+      "tag": "remote-out",
+      "type": "vless",
+      "server": "{{SERVER_ADDR}}",
+      "server_port": 12345,
+
+      "uuid": "{{CLIENT_UUID}}",
+      "transport": {
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "packetaddr"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+services:
+  sing-box:
+    image: ghcr.io/sagernet/sing-box:v1.9.3
+    restart: unless-stopped
+    volumes:
+      - ./sing-box:/config/sing-box:ro
+    command: -c /config/sing-box/config.json -D /data/sing-box run
+  frpc:
+    image: ghcr.io/fatedier/frpc:v0.59.0
+    restart: unless-stopped
+    volumes:
+      - ./frpc:/config/frpc:ro
+    command: -c /config/frpc/config.toml
+volumes:
+  data:
+networks:
+  default:
+    enable_ipv6: true # 启用 IPv6

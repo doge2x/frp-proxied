@@ -1,0 +1,50 @@
+{
+  "log": {
+    "level": "debug"
+  },
+  "dns": {
+    "servers": [{ "tag": "default", "address": "local" }]
+  },
+  "inbounds": [
+    // frpc 从此处入站
+    {
+      "tag": "frpc-in",
+      "type": "direct",
+      "listen": "::",
+      "listen_port": 7001
+    },
+    // client 从此处入站
+    {
+      "tag": "client-in",
+      "type": "socks",
+      "listen": "::",
+      "listen_port": 7002
+    }
+  ],
+  "route": {
+    "auto_detect_interface": true,
+    "rules": [
+      // 来自 frpc 的连接, 重定向到 server:frps
+      { "inbound": "frpc-in", "outbound": "server-frps-out" },
+      // 来自 client 的连接, 直接出站
+      { "inbound": "client-in", "outbound": "direct" }
+    ]
+  },
+  "outbounds": [
+    { "tag": "direct", "type": "direct" },
+    {
+      "tag": "server-frps-out",
+      "type": "vless",
+      "server": "{{SERVER_ADDR}}",
+      "server_port": 12345,
+
+      "uuid": "{{REMOTE_UUID}}",
+      "transport": {
+        "type": "ws",
+        "max_early_data": 2048,
+        "early_data_header_name": "Sec-WebSocket-Protocol"
+      },
+      "packet_encoding": "packetaddr"
+    }
+  ]
+}
