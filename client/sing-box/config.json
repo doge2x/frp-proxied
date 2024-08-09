@@ -13,8 +13,11 @@
       "listen_port": 1080
     }
   ],
-  "route": { "final": "remote-out" },
+  "route": {
+    "rules": [{ "inbound": "proxy-in", "outbound": "remote-out" }]
+  },
   "outbounds": [
+    { "tag": "direct", "type": "direct" },
     {
       "tag": "remote-out",
       "type": "vless",
