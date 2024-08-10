@@ -7,8 +7,16 @@ log.level = "info"
 
 [[visitors]]
 name = "sing-box"
-bindAddr = "::"
-bindPort = 3001
+bindPort = -1
 type = "stcp"
 serverName = "sing-box"
 secretKey = "{{FRP_SECRET}}"
+
+[[visitors]]
+name = "sing-box-p2p"
+bindAddr = "::"
+bindPort = 3001
+type = "xtcp"
+serverName = "sing-box-p2p"
+secretKey = "{{FRP_SECRET}}"
+fallbackTo = "sing-box"

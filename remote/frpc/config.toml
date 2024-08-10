@@ -13,6 +13,13 @@ localPort = 1080
 type = "stcp"
 secretKey = "{{FRP_SECRET}}"
 
+[[proxies]]
+name = "sing-box-p2p"
+localIP = "sing-box"
+localPort = 1080
+type = "xtcp"
+secretKey = "{{FRP_SECRET}}"
+
 # 无需 frpc 客户端即可连接此端口
 [[proxies]]
 name = "sing-box-direct"
