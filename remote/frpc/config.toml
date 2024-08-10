@@ -12,5 +12,3 @@ localIP = "sing-box"
 # 这里是 remote:client-in 的端口
 localPort = 7002
 remotePort = 7002
-transport.useEncryption = true
-transport.useCompression = true
