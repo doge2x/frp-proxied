@@ -11,7 +11,8 @@
       "tag": "frpc-in",
       "type": "direct",
       "listen": "::",
-      "listen_port": 7001
+      "listen_port": 7001,
+      "override_address": "frpc-out.internal"
     },
     // client 从此处入站
     {
@@ -38,7 +39,7 @@
       "server": "{{SERVER_ADDR}}",
       "server_port": 12345,
 
-      "uuid": "{{REMOTE_UUID}}",
+      "uuid": "{{PROXY_UUID}}",
       "transport": {
         "type": "ws",
         "max_early_data": 2048,

@@ -13,10 +13,7 @@
       "listen": "::",
       "listen_port": 7001,
 
-      "users": [
-        { "name": "remote", "uuid": "{{REMOTE_UUID}}" },
-        { "name": "client", "uuid": "{{CLIENT_UUID}}" }
-      ],
+      "users": [{ "name": "alpha", "uuid": "{{PROXY_UUID}}" }],
       "transport": {
         "type": "ws",
         "max_early_data": 2048,
@@ -28,9 +25,9 @@
     "auto_detect_interface": true,
     "rules": [
       // 来自 remote:frpc 的连接, 重定向到 frps
-      { "auth_user": "remote", "outbound": "remote-out" },
+      { "auth_user": "alpha", "domain": "frpc-out.internal", "outbound": "remote-out" },
       // 来自 client 的连接, 重定向到 remote:sing-box
-      { "auth_user": "client", "outbound": "client-out" }
+      { "auth_user": "alpha", "outbound": "client-out" }
     ]
   },
   "outbounds": [

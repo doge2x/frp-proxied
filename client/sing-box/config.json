@@ -24,7 +24,7 @@
       "server": "{{SERVER_ADDR}}",
       "server_port": 12345,
 
-      "uuid": "{{CLIENT_UUID}}",
+      "uuid": "{{PROXY_UUID}}",
       "transport": {
         "type": "ws",
         "max_early_data": 2048,
