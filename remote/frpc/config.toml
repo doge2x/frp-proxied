@@ -4,6 +4,7 @@ log.level = "info"
 serverAddr = "sing-box"
 serverPort = 7001
 auth.token = "{{FRP_TOKEN}}"
+loginFailExit = false
 
 [transport]
 protocol = "tcp"

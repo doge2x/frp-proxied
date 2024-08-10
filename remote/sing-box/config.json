@@ -45,6 +45,7 @@
         "max_early_data": 2048,
         "early_data_header_name": "Sec-WebSocket-Protocol"
       },
+      "multiplex": { "enabled": true },
       // TLS 请根据实际需要开启
       //"tls": {
       //  "enabled": true,

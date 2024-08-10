@@ -4,6 +4,7 @@ log.level = "info"
 serverAddr = "sing-box"
 serverPort = 7001
 auth.token = "{{FRP_TOKEN}}"
+loginFailExit = false
 
 [transport]
 protocol = "tcp"
@@ -14,16 +15,21 @@ tls.enable = false
 
 [[visitors]]
 name = "sing-box"
+# 如果 P2P 效果不好的话, 可以直接通过 stcp 连接
+#bindAddr = "::"
+#bindPort = 3001
 bindPort = -1
 type = "stcp"
 serverName = "sing-box"
 secretKey = "{{FRP_SECRET}}"
 
+# 将这整段注释掉, 以启用上述 sctp 连接
 [[visitors]]
 name = "sing-box-p2p"
 bindAddr = "::"
 bindPort = 3001
 type = "xtcp"
+protocol = "kcp"
 serverName = "sing-box-p2p"
 secretKey = "{{FRP_SECRET}}"
 fallbackTo = "sing-box"
