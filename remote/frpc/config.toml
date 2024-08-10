@@ -1,10 +1,14 @@
+log.to = "console"
+log.level = "info"
+
 serverAddr = "sing-box"
 serverPort = 7001
 auth.token = "{{FRP_TOKEN}}"
-transport.protocol = "tcp"
 
-log.to = "console"
-log.level = "info"
+[transport]
+protocol = "tcp"
+tls.enable = false
+#tls.serverName = "frp.internal"
 
 [[proxies]]
 name = "sing-box"

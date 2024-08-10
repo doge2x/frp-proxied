@@ -1,10 +1,16 @@
+log.to = "console"
+log.level = "info"
+
 serverAddr = "sing-box"
 serverPort = 7001
 auth.token = "{{FRP_TOKEN}}"
-transport.protocol = "tcp"
 
-log.to = "console"
-log.level = "info"
+[transport]
+protocol = "tcp"
+# 底层已通过加密协议传输, 此项不必要
+tls.enable = false
+# 若启用, serverName 必须与 server 中配置的分流规则一致
+#tls.serverName = "frp.internal"
 
 [[visitors]]
 name = "sing-box"
