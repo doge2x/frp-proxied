@@ -6,27 +6,15 @@
     "servers": [{ "tag": "default", "address": "local" }]
   },
   "inbounds": [
-    // frpc 入口
     {
-      "tag": "frp-in",
-      "type": "direct",
-      "listen": "::",
-      "listen_port": 7001,
-      "override_address": "frp.internal"
-    },
-    // 用户流量入口
-    {
-      "tag": "user-in",
+      "tag": "proxy-in",
       "type": "mixed",
       "listen": "::",
       "listen_port": 1080
     }
   ],
   "route": {
-    "rules": [
-      { "inbound": "frp-in", "outbound": "proxy-out" },
-      { "inbound": "user-in", "outbound": "user-out" }
-    ]
+    "rules": [{ "inbound": "proxy-in", "outbound": "proxy-out" }]
   },
   "outbounds": [
     { "tag": "direct", "type": "direct" },
@@ -43,13 +31,6 @@
         "early_data_header_name": "Sec-WebSocket-Protocol"
       },
       "packet_encoding": "packetaddr"
-    },
-    {
-      "tag": "user-out",
-      "type": "socks",
-      "server": "frpc",
-      // 这里的端口是 client:frpc 的 bindPort
-      "server_port": 3001
     }
   ]
 }

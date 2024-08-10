@@ -1,12 +1,12 @@
 {
   "log": {
-    "level": "debug"
+    "level": "info"
   },
   "dns": {
     "servers": [{ "tag": "default", "address": "local" }]
   },
   "inbounds": [
-    // remote:frpc 和 client 从此处入站
+    // remote:frpc 和 user 入口
     {
       "tag": "proxy-in",
       "type": "vless",
@@ -24,27 +24,27 @@
   "route": {
     "auto_detect_interface": true,
     "rules": [
-      // 来自 remote:frpc 的连接, 重定向到 frps
-      { "auth_user": "alpha", "domain": "frpc-out.internal", "outbound": "remote-out" },
-      // 来自 client 的连接, 重定向到 remote:sing-box
-      { "auth_user": "alpha", "outbound": "client-out" }
+      // 来自 frpc 的连接, 重定向到 frps
+      { "auth_user": "alpha", "domain": "frp.internal", "outbound": "frp-out" },
+      // 来自 user 的连接, 重定向到 remote:sing-box
+      { "auth_user": "alpha", "outbound": "user-out" }
     ]
   },
   "outbounds": [
     { "tag": "direct", "type": "direct" },
     {
-      "tag": "remote-out",
+      "tag": "frp-out",
       "type": "direct",
       // 这里的地址是 compose.yaml 中 frps 的服务名
       "override_address": "frps",
       "override_port": 7001
     },
     {
-      "tag": "client-out",
+      "tag": "user-out",
       "type": "socks",
       "server": "frps",
       // 这里的端口是 remote:frpc 的 remotePort
-      "server_port": 7002
+      "server_port": 3001
     }
   ]
 }

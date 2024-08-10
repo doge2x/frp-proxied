@@ -1,0 +1,14 @@
+serverAddr = "sing-box"
+serverPort = 7001
+transport.protocol = "tcp"
+
+log.to = "console"
+log.level = "info"
+
+[[visitors]]
+name = "sing-box"
+bindAddr = "::"
+bindPort = 3001
+type = "stcp"
+serverName = "sing-box"
+secretKey = "{{FRP_SECRET}}"

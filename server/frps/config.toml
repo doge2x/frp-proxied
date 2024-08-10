@@ -1,5 +1,6 @@
+bindAddr = "::"
 bindPort = 7001
-allowPorts = [{ single = 7002 }]
+allowPorts = [{ single = 3001 }]
 
 log.to = "console"
 log.level = "info"

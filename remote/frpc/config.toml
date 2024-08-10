@@ -7,8 +7,16 @@ log.level = "info"
 
 [[proxies]]
 name = "sing-box"
-type = "tcp"
 localIP = "sing-box"
-# 这里是 remote:client-in 的端口
-localPort = 7002
-remotePort = 7002
+# 这里是 remote:user-in 的端口
+localPort = 1080
+type = "stcp"
+secretKey = "{{FRP_SECRET}}"
+
+# 无需 frpc 客户端即可连接此端口
+[[proxies]]
+name = "sing-box-direct"
+localIP = "sing-box"
+localPort = 1080
+type = "tcp"
+remotePort = 3001

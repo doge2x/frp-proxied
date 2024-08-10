@@ -1,40 +1,40 @@
 {
   "log": {
-    "level": "debug"
+    "level": "info"
   },
   "dns": {
     "servers": [{ "tag": "default", "address": "local" }]
   },
   "inbounds": [
-    // frpc 从此处入站
+    // frpc 入口
     {
-      "tag": "frpc-in",
+      "tag": "frp-in",
       "type": "direct",
       "listen": "::",
       "listen_port": 7001,
-      "override_address": "frpc-out.internal"
+      "override_address": "frp.internal"
     },
-    // client 从此处入站
+    // 用户流量入口
     {
-      "tag": "client-in",
-      "type": "socks",
+      "tag": "user-in",
+      "type": "mixed",
       "listen": "::",
-      "listen_port": 7002
+      "listen_port": 1080
     }
   ],
   "route": {
     "auto_detect_interface": true,
     "rules": [
       // 来自 frpc 的连接, 重定向到 server:frps
-      { "inbound": "frpc-in", "outbound": "frpc-out" },
-      // 来自 client 的连接, 直接出站
-      { "inbound": "client-in", "outbound": "direct" }
+      { "inbound": "frp-in", "outbound": "proxy-out" },
+      // 用户流量, 直接出站
+      { "inbound": "user-in", "outbound": "direct" }
     ]
   },
   "outbounds": [
     { "tag": "direct", "type": "direct" },
     {
-      "tag": "frpc-out",
+      "tag": "proxy-out",
       "type": "vless",
       "server": "{{SERVER_ADDR}}",
       "server_port": 12345,
