@@ -1,5 +1,6 @@
 serverAddr = "sing-box"
 serverPort = 7001
+auth.token = "{{FRP_TOKEN}}"
 transport.protocol = "tcp"
 
 log.to = "console"

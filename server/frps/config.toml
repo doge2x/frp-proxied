@@ -1,5 +1,6 @@
 bindAddr = "::"
 bindPort = 7001
+auth.token = "{{FRP_TOKEN}}"
 allowPorts = [{ single = 3001 }]
 
 log.to = "console"
