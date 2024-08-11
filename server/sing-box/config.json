@@ -18,7 +18,8 @@
         "type": "ws",
         "max_early_data": 2048,
         "early_data_header_name": "Sec-WebSocket-Protocol"
-      }
+      },
+      "multiplex": { "enabled": true }
     }
   ],
   "route": {
